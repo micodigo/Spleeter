@@ -12,10 +12,12 @@ def split():
     if request.method == "POST":
         if request.files:
             image = request.files["image"]
-            print(image.filename)
+            stems_seletcted = request.form['stems_select']
+            stems='spleeter:'+stems_seletcted+'stems'
+            # print(image.filename)
             image.save(os.path.join(app.config["upload"], image.filename))
-
-            separator = Separator('spleeter:4stems')
+            separator = Separator(stems)
+            # separator = Separator('spleeter:2stems')
             separator.separate_to_file("/media/codelife/Coding Area/Projects/Spleeter/uploads/abc.mp3", '/media/codelife/Coding Area/Projects/Spleeter/files',codec="mp3")
             shutil.make_archive('abc',"zip","files/abc")
             try:
@@ -23,7 +25,6 @@ def split():
             except shutil.Error:
                 pass
             return send_from_directory("files",path="abc.zip", as_attachment = True)
-            return redirect(request.url)
     return render_template("index.html")
 
 
