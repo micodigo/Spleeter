@@ -18,7 +18,7 @@ def split():
             image.save(os.path.join(app.config["upload"], image.filename))
             separator = Separator(stems)
             # separator = Separator('spleeter:2stems')
-            separator.separate_to_file("/media/codelife/Coding Area/Projects/Spleeter/uploads/abc.mp3", '/media/codelife/Coding Area/Projects/Spleeter/files',codec="mp3")
+            separator.separate_to_file("/media/codelife/Coding Area/Projects/Spleeter/uploads/"+image.filename, '/media/codelife/Coding Area/Projects/Spleeter/files',codec="mp3")
             shutil.make_archive('abc',"zip","files/abc")
             try:
                 shutil.move("abc.zip","files")
